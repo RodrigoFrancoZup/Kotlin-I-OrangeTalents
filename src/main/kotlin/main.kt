@@ -5,40 +5,90 @@ fun main() {
     //entendendoDiferencaEntreCopiaEReferencia()
 
     val contaRodrigo = Conta()
-    contaRodrigo.titular = "Rodrigo"
-    contaRodrigo.numero = 1000
-    contaRodrigo.saldo = 200.0
+    contaRodrigo.setTitular("Rodrigo")
+    contaRodrigo.setNumero(1000)
+    contaRodrigo.setSaldo(200.0)
 
     val contaFran = Conta()
-    contaFran.titular = "Fran"
-    contaFran.numero = 1001
-    contaFran.saldo = 300.0
+    contaFran.setTitular("Fran")
+    contaFran.setNumero(1001)
+    contaFran.setSaldo(300.00)
 
-    println(contaRodrigo.titular)
-    println(contaRodrigo.numero)
-    println(contaRodrigo.saldo)
+    println(contaRodrigo.getTitular())
+    println(contaFran.getTitular())
 
-    println(contaFran.titular)
-    println(contaFran.numero)
-    println(contaFran.saldo)
 
-    println("Depositando na conta do ${contaRodrigo.titular}")
-    deposita(contaRodrigo, 50.0)
-    println("Saldo da conta Rodrigo é de: ${contaRodrigo.saldo}")
+    println("Depositando na conta do ${contaRodrigo.getTitular()}")
+    contaRodrigo.deposita(50.0)
+    println("Saldo da conta Rodrigo é de: ${contaRodrigo.getSaldo()}")
+
+    println("Saque na conta do ${contaRodrigo.getTitular()}")
+    contaRodrigo.saca(200.0)
+    println("Saldo da conta Rodrigo é de: ${contaRodrigo.getSaldo()}")
+
+    println("Transferencia da conta do ${contaRodrigo.getTitular()} para a conta da ${contaFran.getTitular()}")
+    if(contaRodrigo.transfere(50.00, contaFran)){
+        println("Transferencia Ok!")
+    }else{
+        println("Falha na Transferencia!")
+    }
+    println("Saldo da conta Fran é de: ${contaFran.getSaldo()}")
 
 }
 
 //Criando a classe Conta - Vamos melhorar no futuro
 class Conta{
-    var titular = ""
-    var numero = 0
-    var saldo = 0.0
+    private var titular = ""
+    private var numero = 0
+    private var saldo = 0.0
 
+    fun deposita(valor: Double){
+        this.saldo += valor
+    }
+
+    fun saca(valor: Double){
+        if(this.saldo >= valor){
+            this.saldo -= valor
+        }else{
+            println("Saldo insuficiente!")
+        }
+    }
+
+    fun transfere(valor: Double, destino: Conta) : Boolean{
+        if(this.saldo >= valor){
+            this.saldo -= valor
+            destino.deposita(valor)
+            return true
+        }
+            return false
+    }
+
+    fun getSaldo() : Double{
+        return this.saldo
+    }
+
+    fun getTitular() : String{
+        return this.titular
+    }
+
+    fun getNumero() : Int{
+        return this.numero
+    }
+
+    fun setSaldo(saldo: Double){
+        this.saldo = saldo
+    }
+
+    fun setTitular(titular: String){
+        this.titular = titular
+    }
+
+    fun setNumero(numero: Int){
+        this.numero = numero
+    }
 }
 
-fun deposita(conta: Conta, valor: Double){
-    conta.saldo += valor
-}
+
 
 
 
@@ -140,49 +190,55 @@ fun fluxoDeRepeticao() {
     }while(t<5)
 }
 
+
 fun entendendoDiferencaEntreCopiaEReferencia(){
     //É igual no java
     //contaRodrigo é uma referencia para o objeto do tipo Conta
-    val contaRodrigo = Conta()
-    contaRodrigo.titular = "Rodrigo"
-    contaRodrigo.numero = 1000
-    contaRodrigo.saldo = 200.0
 
-    val contaFran = Conta()
-    contaFran.titular = "Fran"
-    contaFran.numero = 1001
-    contaFran.saldo = 300.0
-
-    println(contaRodrigo.titular)
-    println(contaRodrigo.numero)
-    println(contaRodrigo.saldo)
-
-    println(contaFran.titular)
-    println(contaFran.numero)
-    println(contaFran.saldo)
+//    val contaRodrigo = Conta()
+//    contaRodrigo.titular = "Rodrigo"
+//    contaRodrigo.numero = 1000
+//    contaRodrigo.saldo = 200.0
+//
+//    val contaFran = Conta()
+//    contaFran.titular = "Fran"
+//    contaFran.numero = 1001
+//    contaFran.saldo = 300.0
+//
+//    println(contaRodrigo.titular)
+//    println(contaRodrigo.numero)
+//    println(contaRodrigo.saldo)
+//
+//    println(contaFran.titular)
+//    println(contaFran.numero)
+//    println(contaFran.saldo)
 
     // Inicio do: Entendo copia e referencia:
 
     // --Variaveis com tipo Primitivo:
-    val numeroX = 10
-    var numeroY = numeroX
-    numeroY++
+
+//    val numeroX = 10
+//    var numeroY = numeroX
+//    numeroY++
 
     //Apenas o numeroY foi alterado! Pois com número primitivo ocorre a Copia!
-    println("numeroX $numeroX")
-    println("numeroY $numeroY")
+
+//    println("numeroX $numeroX")
+//    println("numeroY $numeroY")
 
     // --Variaveis que são referencia de um objeto
-    val contaJoao = Conta()
-    contaJoao.titular = "João"
 
-    val contaMaria = contaJoao;
-    contaMaria.titular = "Maria"
+//    val contaJoao = Conta()
+//    contaJoao.titular = "João"
+//
+//    val contaMaria = contaJoao;
+//    contaMaria.titular = "Maria"
 
     //Ambas as contas foram alteradas! Pois a variável que aponta para objeto é sempre uma referencia!
     //Apontam para o mesmo endereço de memoria!
-    println("Titular de contaJoao é ${contaJoao.titular}")
-    println("Titular de contaMaria é ${contaMaria.titular}")
+
+//    println("Titular de contaJoao é ${contaJoao.titular}")
+//    println("Titular de contaMaria é ${contaMaria.titular}")
 
     //Fim do: Entendendo copia e referencia.
 }
