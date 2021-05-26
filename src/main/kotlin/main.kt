@@ -1,9 +1,48 @@
 fun main() {
-    //cap01()
-    cap02()
+    println("Bem vindo ao Bytebank!");
+    //variaveis()
+    //fluxoDeRepeticao()
+    //entendendoDiferencaEntreCopiaEReferencia()
+
+    val contaRodrigo = Conta()
+    contaRodrigo.titular = "Rodrigo"
+    contaRodrigo.numero = 1000
+    contaRodrigo.saldo = 200.0
+
+    val contaFran = Conta()
+    contaFran.titular = "Fran"
+    contaFran.numero = 1001
+    contaFran.saldo = 300.0
+
+    println(contaRodrigo.titular)
+    println(contaRodrigo.numero)
+    println(contaRodrigo.saldo)
+
+    println(contaFran.titular)
+    println(contaFran.numero)
+    println(contaFran.saldo)
+
+    println("Depositando na conta do ${contaRodrigo.titular}")
+    deposita(contaRodrigo, 50.0)
+    println("Saldo da conta Rodrigo é de: ${contaRodrigo.saldo}")
+
 }
 
-fun cap01() {
+//Criando a classe Conta - Vamos melhorar no futuro
+class Conta{
+    var titular = ""
+    var numero = 0
+    var saldo = 0.0
+
+}
+
+fun deposita(conta: Conta, valor: Double){
+    conta.saldo += valor
+}
+
+
+
+fun variaveis() {
     println("Bem vindo ao Bytebank!");
 
     //val é a variaável que não pode mudar de valor e é uma boa prática usá-la!
@@ -28,7 +67,7 @@ fun cap01() {
     println("Saldo $saldo")
 }
 
-fun cap02() {
+fun fluxoDeRepeticao() {
     var saldo = 0.0
 
     //Quando fazemos esse IF a IDE sugere utilizarmos o When, ilustrado a seguir:
@@ -99,4 +138,51 @@ fun cap02() {
         println("Do while $t")
         t++
     }while(t<5)
+}
+
+fun entendendoDiferencaEntreCopiaEReferencia(){
+    //É igual no java
+    //contaRodrigo é uma referencia para o objeto do tipo Conta
+    val contaRodrigo = Conta()
+    contaRodrigo.titular = "Rodrigo"
+    contaRodrigo.numero = 1000
+    contaRodrigo.saldo = 200.0
+
+    val contaFran = Conta()
+    contaFran.titular = "Fran"
+    contaFran.numero = 1001
+    contaFran.saldo = 300.0
+
+    println(contaRodrigo.titular)
+    println(contaRodrigo.numero)
+    println(contaRodrigo.saldo)
+
+    println(contaFran.titular)
+    println(contaFran.numero)
+    println(contaFran.saldo)
+
+    // Inicio do: Entendo copia e referencia:
+
+    // --Variaveis com tipo Primitivo:
+    val numeroX = 10
+    var numeroY = numeroX
+    numeroY++
+
+    //Apenas o numeroY foi alterado! Pois com número primitivo ocorre a Copia!
+    println("numeroX $numeroX")
+    println("numeroY $numeroY")
+
+    // --Variaveis que são referencia de um objeto
+    val contaJoao = Conta()
+    contaJoao.titular = "João"
+
+    val contaMaria = contaJoao;
+    contaMaria.titular = "Maria"
+
+    //Ambas as contas foram alteradas! Pois a variável que aponta para objeto é sempre uma referencia!
+    //Apontam para o mesmo endereço de memoria!
+    println("Titular de contaJoao é ${contaJoao.titular}")
+    println("Titular de contaMaria é ${contaMaria.titular}")
+
+    //Fim do: Entendendo copia e referencia.
 }
