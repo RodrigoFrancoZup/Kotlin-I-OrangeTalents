@@ -1,0 +1,70 @@
+Capítulo 01 - Primeiros passos
+Nesse capítulo aprendemos:
+
+⦁	Que para programar em Kotlin devemos isntalar o JDK do Java e uma IDE, o recomendável é o IntelliJ;
+
+⦁	Que a documentação do Kotlin está em: https://kotlinlang.org/docs/home.html
+
+⦁	Que para criar o Projeto devemos escolher a Opção Kotlin -> Na seção JVM escolher Application;
+
+⦁	Ao instalar a IDE IntelliJ devemos instalar o Plugin do Kotlin;
+
+⦁	Que as classes/Files do Kotlin devem ficar na pasta src/main/kotlin
+
+⦁	Todo código deve ficar denrto de:
+
+	fun min(){
+
+		CÓDIGO FICA AQUI!
+	}
+
+⦁	Para escrever no console podemos usar o print() ou println(), o segundo pula a linha;
+
+⦁	Não precisamos usar o ";" no fim de cada linha;
+
+⦁	Toda váriavel tem que ser iniciada com um valor!
+
+⦁	Conhecemos dois tipos de variáveis:
+val -> É uma variável mutável;
+var -> É uma variável mutável;
+
+Exemplo:
+val nome = "Rodrigo" ~~ agora não posso mais mudar seu valor
+var nome = "Rodrigo"  ~~ essa permite: nome = "Rodrigo Franco"
+
+⦁	As variáveis são tipadas de maneira implicitamente (escondido). O valor que uma virável recebe vai tipar a mesma, exemplo:
+
+val nome = "Rodrigo"  ~~ A variável nome será do tipo String, pois recebeu um texto como valor. Não vamos conseguir atribuir a ela um valor de outro tipo;
+
+⦁	Podemos deixar explicito o tipo da variável, por exemplo:
+
+val nome: String = "Rodrigo" 
+
+
+⦁	Podemos concatenar String, exemplo:
+
+println("O titular é: " + nome)
+
+
+⦁	Para exibir (printar na tela) é mais comum usarmos o template:
+
+println("O titular é: $nome")
+
+⦁	Temos o operador += , -=, etc...Exemplo:
+var saldo = 0.0
+saldo += 100
+
+⦁	Pergunta do Capítulo: Ao criar variáveis no Kotlin, percebemos que existem algumas restrições. Marque as alternativas verdadeiras sobre as variáveis do Kotlin:
+
+Verdadeiras:
+Todas as variáveis precisam de um valor de inicialização para o programa rodar. (Justificativa:Isso mesmo! Código em Kotlin não permite que nenhuma variável fique sem valor de inicialização, portanto, para compilar o código e rodar, todas as variáveis devem ser inicializadas.);
+
+Não é necessário declarar explicitamente o tipo da variável. (Justificativa:Exato! No Kotlin existe a técnica conhecida como inferência de tipo que é quando o compilador interpreta o valor que está sendo atribuído para a variável e determina qual é o seu tipo implicitamente.)
+
+Falsas:
+Variáveis do Kotlin são dinamicamente tipadas, podem receber o tipo mais de uma vez. (Justificativa:Assim como no Java, o Kotlin é estaticamente tipado, portanto, uma vez que uma variável é assinada, ela mantém o tipo até a instrução finalizar.);
+
+Ao declarar uma variável nova, primeiro optamos pelo var e mudamos para val quando necessário.(Justificativa: Muito pelo contrário! Considerando apenas o uso do var quando o nosso código de fato altera o valor da variável, caso contrário a boa prática é declarar a variável como val.)
+
+
+

@@ -1,0 +1,91 @@
+Capítulo 05 - Escrevendo o código mais idiomático ao Kotlin
+Nesse capítulo aprendemos:
+
+
+⦁	No capitulo anterior nós encapsulamos os atributos da classe Conta, para isso criamos os métodos getter e setter e deixamos os atributos no modo privado com o private. Isso funciona, mas no Kotlin nós não fazemos dessa maneira.
+
+No Kotlin os campos/atributos de uma classe já possuem por padrão o seu setter e getter. E quando assumimos que o campo/atributo usará esse getter e setter passamos a chamar esses campos de properties. 
+
+Obs: Uma properties é uma variavel/campo/atributo que só terá acesso ao valores através do getter e setter;
+
+Está implicito que de baixo de cada atributo/propertie há o trecho get e set, por exemplo:
+
+var saldo = 0.0
+	set
+	get
+
+Ainda digo mais, o código padrão desse set get é:
+
+var saldo = 0.0
+	set(valor){
+		field = valor
+	}
+	get(){return field}
+
+Logo se vamos usar o get e set padrão não precisamos escrever nada em baixo das properties!
+
+Ou seja, NOSSO CÓDIGO SEMPRE ESTEVE ENCAPSULADO, MESMO SEM AS FUNÇÕES GETTER E SETTER!
+
+⦁	Lebra que antes era possível adicionar regras de negócio nos métodos getters e setters, e agora, como vamos fazer se precisarmos disso? Faz de conta que só quero aceitar usar o setter do saldo se o valor passado for maior que 1000:
+
+var saldo = 0.0 
+	set(valor){ 
+		if(valor > 1000){ 
+			field = valor } 
+		}
+
+Como a regra que vamos definir é para saldo, o trecho de código fica logo em baixo da propertie saldo.
+Esse "field" representa de fato a inserção do valor que estamos passando para a properties, é ele que injeta esse valor!
+O parâmetro valor é de fato o valor que eu estou passando para a propertie.
+
+⦁	Mas NÃO queremos que ninguem seja capaz de usar o set da propertie saldo, pois para atribuir um valor a essa propertie faz sentido usar o método deposita(), para isso podemos colocar a palavra private no set do saldo, ficando assim:
+
+var saldo = 0.0 
+	private set
+
+⦁	Construtor - No momento de construir um objeto eu posso definir os valores de algumas properties (atributos) e ao fazer isso eu também estou garantindo a obrigatoriedade dessa propertie (atributo). No exemplo que estou fazendo é obrigatório que toda conta tenha titular e um número, então esses valores podem ficar no construtor do objeto Conta e quando alguem for construir um objeto desse tipo será obrigado a passá-los. Já a propertie saldo não é necessário no momento da criação, pois ela pode muito bem ser iniciada com 0 e no futuro alguem passe atribua algum valor a ela...
+
+⦁	Criando o construtor de conta. Toda classe já vem com o construtor padrão implicitamente, igual no java:
+
+	constructor()
+
+Mas é possível criar um recebendo properties, ficando assim:
+
+	constructor(titular: String, numero: Int){ 
+		this.titular = titular 
+		this.numero = numero 
+	}
+
+Agora quando criamos uma referência para Conta é obrigátorio passar titular e nuero:
+
+	val contaRodrigo = Conta("Rodrigo", 1000)
+
+⦁	Só que na verdade em Kotlin temos dois contrutores por padrão, o secundário é o que  fizemos no item anterior. O mais usado é o consturtor primário, que é indicado na frente do nome da classe:
+
+class Conta(titular: String, numero: Int){ 
+	var titular = titular
+	var numero = numero
+	var saldo = 0.0 
+		private set
+}
+
+	Só que no Kotlin é comum usarmos isso de outra maneira:
+
+	class Conta(
+		var titular: String, 
+		var numero: Int
+){ 
+		var saldo = 0.0 
+			private set 
+	}
+
+	Note que removemos as properties do corpo da classe Conta e já as colocamos diretamente no construtor primário da classe. Nesse construtor padrão pdoeriamos colcoar o valor padrão, por exemplo numero = 0, dessa maneira, quando for construir objeto Conta se passarem um valor para numero o mesmo seria usado, caso não passem o valor padrão seria o 0.
+
+⦁	Utilizando Labels. É uma etiqueta na hora de construir um objeto, por exemplo ao construir o objeto Conta:
+	val contaRodrigo = Conta(titular = "Rodrigo",  numero = 1000)
+	Usamos as labels titular e numero. O bom disso que não precisamos manter a ordem que está lá na assinatura da classe Conta. Isso também funciona para métodos. No java tinhamos que manter a ordem da assinatura da classe/metodo.
+
+⦁	Pergnta do Capitulo:Em vez de utilizar os métodos de acesso (getter e setter) para acessar o saldo, utilizamos a property. Com base no que foi demonstrado em vídeo, marque as alternativas corretas:
+Respostas:Properties apresentam o mesmo comportamento de métodos de acesso e é mais idiomático ao Kotlin. (Justificativa: Todas os campos do Kotlin são properties, portanto, não existe a necessidade de implementar métodos de acesso.)
+
+Não é necessário escrever setter ou getter ao utilizar property. (Justificativa: Dada a ideia de que a boa prática em Orientação a Objetos é acessar campos via métodos de acesso, com properties apenas escrevemos o comportamento diferente quando for necessário.)

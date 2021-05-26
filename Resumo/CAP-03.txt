@@ -1,0 +1,64 @@
+Capítulo 03 - Conhecendo a Orientação a Objetos
+Nesse capítulo aprendemos:
+
+⦁	Normalmente vamos criar Classes a nível de arquivo. Mas podemos criar classe dentro de outra classe e até mesmo criar classe dentro de uma função, mas dai vamos perder a reusabilidade da classe, pois ela só sera acessada dentro daquela função;
+
+⦁	Criando a classe Conta. Depois vamos melhorar a maneira de se criar uma classe:
+
+class Conta{ 
+
+var titular = "" 
+var numero = 0 
+var saldo = 0.0
+ 
+}
+
+⦁	No método main, podemos criar uma referencia para o objeto conta, é igual no java:
+
+val contaRodrigo = Conta()
+contaRodrigo.titular = "Rodrigo"
+contaRodrigo.numero = 1000
+contaRodrigo.saldo = 300.00
+
+println(contaRodrigo.titular)
+
+⦁	Copia e referencia, vamos entender a diferença:
+
+Pense no seguinte código:
+
+val numeroX = 10 
+var numeroY = numeroX 
+numeroY++
+
+Aqui temos uma váriavel numeroX recebendo o valor 10 (valor do tipo inteiro) e a váriavel numeroY recebendo o valor da variável numeroX. Ao somar 1 ná variável numeroY quais variáveis terão o valor alterado? Somente a váriavel Y, pois essas variáveis estão guardando valores do tipo primitivo (inteiro), logo ocorre apenas a copia do valor!
+
+Pense no seguinte código:
+
+val contaJoao = Conta() 
+contaJoao.titular = "João" 
+
+val contaMaria = contaJoao; 
+contaMaria.titular = "Maria"
+
+Agora temos a váriavel contaJoao apontando para o objeto do tipo Conta e colocamos nessa váriavel o valor João. Depois criamos a variavel contaMaria apontando para onde a variável contaJoao aponta e demos um valor para ela de Maria. Quais váriaveis terão seu valor alterado? Ambas viariáveis, pois nesse caso as variaveis apontam para Objeto, logo essas variáveis são referência.  Pense assim, a variavel contaJoao vai apontar para um endereço de memoria e criamos a contaMaria apontando para o mesmo endereço (pois ela recebe contaJoao), logo qualquer referencia (contaJoao ou contaMaria) que alterar o valor vai afetar o mesmo endereço de memória!
+
+⦁	Implementando o depósito:
+
+Vamos criar uma função deposita, que irá receber uma referencia de conta e o valor a ser deposita:
+
+fun deposita(conta: Conta, valor: Double){ 
+	conta.saldo += valor 
+}
+
+Ainda não estamos fazendo o uso da orientação a objeto, mas agora podemos fazer um deposito na conta do Rodrigo da seguinte forma:
+
+deposita(contaRodrigo, 50.0)
+
+
+⦁	Pergunta do capítulo: Ao trabalhar com Orientação a Objetos, precisamos ficar atentos ao usar uma variável por conta da atribuição por cópia ou referência. Considerando o que foi estudado em vídeo, marque a alternativa correta.
+Resposta:Ao alterar uma variável de um objeto, todas as variáveis que apontam para o objeto enxergam o mesmo valor.
+Justificativa: Ao utilizar uma referência, qualquer modificação que é feita no objeto é único para todas as variáveis que apontam para a referência.
+
+
+
+

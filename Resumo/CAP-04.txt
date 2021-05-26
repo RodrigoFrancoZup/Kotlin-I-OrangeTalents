@@ -1,0 +1,81 @@
+Capítulo 04 - Implementando comportamentos (Método da Classe)
+Nesse capítulo aprendemos:
+
+
+⦁	O comportamento de depositar, sacar e transferir é referente a conta, logo faz todo sentido que essas funções fiquem dentro da classe Conta. Vamos chamar isso de métodos/comportamentos da classe;
+
+⦁	Para chamar esse comportamento faremos (exemplo chamando o método deposita, passando o valor de 1000.00):
+
+val contaRodrigo = Conta()
+contaRodrigo.deposita(1000.00)
+
+⦁	A classe Conta com seus métodos ficará:
+
+class Conta{
+    var titular = ""
+    var numero = 0
+    var saldo = 0.0
+
+    fun deposita(valor: Double){
+        this.saldo += valor
+    }
+
+    fun saca(valor: Double){
+        if(this.saldo >= valor){
+            this.saldo -= valor
+        }else{
+            println("Saldo insuficiente!")
+        }
+    }
+
+    fun transfere(valor: Double, destino: Conta) : Boolean{
+        if(this.saldo >= valor){
+            this.saldo -= valor
+            destino.saldo += valor
+            return true
+        }
+            return false
+    }
+}
+
+⦁	Diferente do Java, o retorno da assinatura do método fica no final da assinatura do método e possui um : separando os parâmetros do retorno, exemplo:
+
+fun transfere(valor: Double, destino: Conta) : Boolean{
+}
+
+Esse método retornará um Boolean
+
+⦁	Encapsulamento com getter e setter:
+
+Os atributos da classe Conta vão ser agora privados, ganham a palavra private, exemplo:
+
+	private var titular = ""
+
+Com isso não vamos conseguir mais utilizar o código:
+
+	contaRodrigo.titular = "Rodrigo"
+
+Agora para atribuir ou pegar o valor do atributo titular do objeto conta, teremos que usar métodos. Para isso existem os método get e set:
+
+Para pegar o valor:
+
+	fun getSaldo() : Double{ 
+		return this.saldo 
+	}
+
+Para atribuir o valor:
+
+	fun setSaldo(saldo: Double){ 
+		this.saldo = saldo 
+	}
+
+Teremos que mudar todo o código na função main()
+
+
+⦁	Pergunta:Ao implementar os comportamentos para conta, criamos funções membros que também são conhecidas como métodos ou comportamentos. Por qual motivo escolhemos essa abordagem?
+Resposta: As classes são as responsáveis por modificar seus atributos. 
+Justificativa:A boa prática de orientação a objetos é que qualquer comportamento que ajuste o estado da classe (modifique os atributos), deve ser implementado pela própria classe.
+
+
+⦁	Pergunta 2:Ao analisar o código da classe Conta, utilizamos getter e setter para acessar o campo do saldo. Percebemos que essa técnica é conhecida como encapsulamento e é bastante comum em Orientação a Objetos. Por quais motivos utilizamos o encapsulamento?
+Respostas:Para adicionar lógica ao inicializar um atributo.  Para impedir a manipulação direta do atributo em qualquer ponto do código.
